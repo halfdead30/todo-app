@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
 import Device from "./components/DeviceWrapper/DeviceWrapper";
 import Header from "./components/Header/Header";
 import Content from "./components/Content/Content";
 import Footer from "./components/Footer/Footer";
+import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 
 let initialState = [];
 
@@ -12,6 +15,7 @@ const App = () => {
   const [activeTab, setActiveTab] = useState("");
   const [openFormInput, setOpenFormInput] = useState(false);
   const [day, date, month] = new Date().toString().split(" ").slice(0, 3);
+  const darkMode = useSelector((state) => state.theme.darkThemeEnabled);
 
   useEffect(() => {
     setTimeout(() => {
@@ -78,31 +82,30 @@ const App = () => {
   };
 
   return (
-    <Device 
-      containerBgColor="#eaeaea"
-      shadowColor="rgba(0, 0, 0, 0.25)"
-      borderColor="#fff"
-      bgColor="#f3f3f3"
-    >
-      <Header day={day} date={date} month={month} />
+    <ThemeProvider theme={{ theme: darkMode ? "dark" : "light" }}>
+      <ThemeSwitcher />
 
-      <Content
-        tasks={tasks}
-        activeTab={activeTab}
-        openTab={openTab}
-        changeStatus={changeStatus}
-        deleteTask={deleteTask}
-      />
+      <Device>
+        <Header day={day} date={date} month={month} />
 
-      <Footer
-        openFormInput={openFormInput}
-        setOpenFormInput={() => setOpenFormInput(!openFormInput)}
-        addTask={addTask}
-        newTask={newTask}
-        handleChange={handleChange}
-        handleEsc={handleEsc}
-      />
-    </Device>
+        <Content
+          tasks={tasks}
+          activeTab={activeTab}
+          openTab={openTab}
+          changeStatus={changeStatus}
+          deleteTask={deleteTask}
+        />
+
+        <Footer
+          openFormInput={openFormInput}
+          setOpenFormInput={() => setOpenFormInput(!openFormInput)}
+          addTask={addTask}
+          newTask={newTask}
+          handleChange={handleChange}
+          handleEsc={handleEsc}
+        />
+      </Device>
+    </ThemeProvider>
   );
 };
 

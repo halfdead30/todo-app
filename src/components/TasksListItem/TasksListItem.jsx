@@ -1,25 +1,14 @@
 import React from "react";
-import TaskElement from './TaskElement.style';
+import TaskElement from "./TaskElement.style";
 import { ReactComponent as Checkbox } from "../../assets/check_box.svg";
 import { ReactComponent as CheckboxChecked } from "../../assets/check_box_checked.svg";
 import { ReactComponent as DeleteTrash } from "../../assets/delete.svg";
 
-const TasksListItem = ({
-  title,
-  done,
-  deleted,
-  changeStatus,
-  deleteTask,
-}) => {
-    const cssClass = deleted ? "removed" : done ? "done" : "";
+const TasksListItem = ({ title, done, deleted, changeStatus, deleteTask }) => {
+  const cssClass = deleted ? "removed" : done ? "done" : "";
 
   return (
-    <TaskElement
-      className={cssClass}
-      borderColor="#e8e8e8"
-      textRemovedColor="#ccc"
-      textDoneColor="#7d7d7d"
-    >
+    <TaskElement className={cssClass}>
       {done ? (
         <CheckboxChecked onClick={changeStatus} className="far" />
       ) : (

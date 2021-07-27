@@ -1,14 +1,12 @@
-import React from 'react';
-import HeaderWrapper from './Header.style';
+import React from "react";
+import HeaderWrapper from "./Header.style";
 
 const Header = ({ day, date, month }) => (
-    <HeaderWrapper 
-        deviceBorderColor="#fff"
-    >
-        <div className="iphone__x"></div>
-        <h1>Hello, Yura</h1>
-        <div className="greeting">Today, {`${day} ${date} ${month}`}</div>
-    </HeaderWrapper>
+  <HeaderWrapper>
+    <div className="iphone__x"></div>
+    <h1>Hello, Yura</h1>
+    <div className="greeting">Today, {`${day} ${date} ${month}`}</div>
+  </HeaderWrapper>
 );
 
 export default Header;

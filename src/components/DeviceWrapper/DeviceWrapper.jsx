@@ -1,5 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { themeLayout } from "../../theme/themeLayout";
 
 /**
  * @param containerBgColor: #eaeaea
@@ -9,47 +10,42 @@ import styled from 'styled-components';
  */
 
 const Container = styled.div`
-    height: 100vh;
-    width: 100vw;
-    background-color: ${props => props.containerBgColor};
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: ${themeLayout.containerBgColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const DeviceWrapper = styled.div`
-    box-sizing: border-box;
-    height: 800px;
-    width: 375px;
-    overflow: hidden;
-    border-radius: 40px;
-    box-shadow: 2px 12px 20px 2px ${props => props.shadowColor};
-    border: 4px solid ${props => props.borderColor};
+  box-sizing: border-box;
+  height: 800px;
+  width: 375px;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: 2px 12px 20px 2px ${themeLayout.shadowColor};
+  border: 4px solid ${themeLayout.mainBorderColor};
 
-    .device {
-        box-sizing: border-box;
-        height: 100%;
-        width: 100%;
-        background: ${props => props.bgColor};
-        display: flex;
-        flex-direction: column;
-        overflow-y: scroll;
-        position: relative;
-    }
+  .device {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    background: ${themeLayout.deviceBgColor};
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    position: relative;
+    color: ${themeLayout.mainTextColor};
+  }
 `;
 
-const Device = ({containerBgColor, shadowColor, borderColor, bgColor, children}) => (
-    <Container containerBgColor={containerBgColor}>
-        <DeviceWrapper
-            shadowColor={shadowColor}
-            borderColor={borderColor}
-            bgColor={bgColor}
-        >
-            <div className="device">
-                {children}
-            </div>
-        </DeviceWrapper>
-    </Container>
+const Device = ({ children }) => (
+  <Container>
+    <DeviceWrapper>
+      <div className="device">{children}</div>
+    </DeviceWrapper>
+  </Container>
 );
 
 export default Device;
