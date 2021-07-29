@@ -11,7 +11,7 @@ const ThemeSwitcherWrapper = styled.div`
     position: absolute;
     right: 20px;
     padding: 20px;
-    border: 1px solid ${themeLayout.svgFillColor};
+    border: 2px solid ${themeLayout.svgFillColor};
     border-radius: 50%;
     cursor: pointer;
     top: 20px;

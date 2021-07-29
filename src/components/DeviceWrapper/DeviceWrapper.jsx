@@ -19,6 +19,7 @@ const Container = styled.div`
 `;
 
 const DeviceWrapper = styled.div`
+  position: relative;
   box-sizing: border-box;
   height: 800px;
   width: 375px;
@@ -26,6 +27,19 @@ const DeviceWrapper = styled.div`
   border-radius: 40px;
   box-shadow: 2px 12px 20px 2px ${themeLayout.shadowColor};
   border: 4px solid ${themeLayout.mainBorderColor};
+
+  .iphone__x {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    width: 146px;
+    height: 34px;
+    transform: translate(-50%, -100%);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: ${themeLayout.mainBorderColor};
+    z-index: 99;
+  }
 
   .device {
     box-sizing: border-box;
@@ -43,6 +57,7 @@ const DeviceWrapper = styled.div`
 const Device = ({ children }) => (
   <Container>
     <DeviceWrapper>
+      <div className="iphone__x"></div>
       <div className="device">{children}</div>
     </DeviceWrapper>
   </Container>

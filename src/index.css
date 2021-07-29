@@ -22,3 +22,7 @@ ul {
   margin: unset;
   list-style-type: none;
 }
+
+a {
+  color: inherit;
+}

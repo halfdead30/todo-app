@@ -1,26 +1,29 @@
-import React from 'react';
-import FooterWrapper from './Footer.style';
-import AddTaskForm from '../AddTaskForm/AddTaskForm';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsFormOpen } from "../../store/reducers/formStatusReducer";
+import FooterWrapper from "./Footer.style";
+import AddTaskForm from "../AddTaskForm/AddTaskForm";
 
-const Footer = ({ openFormInput, setOpenFormInput, addTask, newTask, handleChange, handleEsc }) => {
-    return (
-        <FooterWrapper
-            btnBgColor="#000"
-            hrBgColor="#fff"
-        >
-            <div className="add__button__wrapper" onClick={() => setOpenFormInput(!openFormInput)}>
-                <span className="hr"></span>
-                <span className="hr vr"></span>
-            </div>
-            <AddTaskForm
-                openFormInput={openFormInput}
-                addTask={addTask}
-                newTask={newTask}
-                handleChange={handleChange}
-                handleEsc={handleEsc} 
-            />
-        </FooterWrapper>
-    );
+const Footer = ({ addTask, newTask, handleChange }) => {
+  const isFormOpen = useSelector((state) => state.isFormOpen.status);
+  const dispatch = useDispatch();
+
+  const handleClick = (e) => dispatch(setIsFormOpen({ isFormOpen }));
+
+  return (
+    <FooterWrapper btnBgColor="#000" hrBgColor="#fff">
+      <div className="add__button__wrapper" onClick={handleClick}>
+        <span className="hr"></span>
+        <span className="hr vr"></span>
+      </div>
+      <AddTaskForm
+        isFormOpen={isFormOpen}
+        addTask={addTask}
+        newTask={newTask}
+        handleChange={handleChange}
+      />
+    </FooterWrapper>
+  );
 };
 
 export default Footer;

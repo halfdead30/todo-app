@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
+import { Route, Switch } from "react-router-dom";
 import Device from "./components/DeviceWrapper/DeviceWrapper";
-import Header from "./components/Header/Header";
+import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
 import Content from "./components/Content/Content";
-import Footer from "./components/Footer/Footer";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 
 let initialState = [];
@@ -13,34 +14,10 @@ const App = () => {
   const [tasks, setTasks] = useState(initialState);
   const [newTask, setNewTask] = useState("");
   const [activeTab, setActiveTab] = useState("");
-  const [openFormInput, setOpenFormInput] = useState(false);
   const [day, date, month] = new Date().toString().split(" ").slice(0, 3);
   const darkMode = useSelector((state) => state.theme.darkThemeEnabled);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setTasks([
-        { id: 1, title: "First task. Wake up", done: false, deleted: false },
-        {
-          id: 2,
-          title: "Second task. Go to the bath",
-          done: false,
-          deleted: false,
-        },
-        {
-          id: 3,
-          title: "Third task. Make the breakfast",
-          done: false,
-          deleted: false,
-        },
-      ]);
-    }, 2000);
-  }, []);
-
   const handleChange = (e) => setNewTask(e.target.value);
-
-  const handleEsc = (e) =>
-    e.keyCode === 27 ? setOpenFormInput(!openFormInput) : null;
 
   const addTask = (e) => {
     e.preventDefault();
@@ -58,7 +35,6 @@ const App = () => {
     ]);
 
     setNewTask("");
-    setOpenFormInput(!openFormInput);
   };
 
   const openTab = (type) => {
@@ -86,24 +62,29 @@ const App = () => {
       <ThemeSwitcher />
 
       <Device>
-        <Header day={day} date={date} month={month} />
-
-        <Content
-          tasks={tasks}
-          activeTab={activeTab}
-          openTab={openTab}
-          changeStatus={changeStatus}
-          deleteTask={deleteTask}
-        />
-
-        <Footer
-          openFormInput={openFormInput}
-          setOpenFormInput={() => setOpenFormInput(!openFormInput)}
-          addTask={addTask}
-          newTask={newTask}
-          handleChange={handleChange}
-          handleEsc={handleEsc}
-        />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <Content
+                tasks={tasks}
+                day={day}
+                date={date}
+                month={month}
+                activeTab={activeTab}
+                openTab={openTab}
+                changeStatus={changeStatus}
+                deleteTask={deleteTask}
+                addTask={addTask}
+                newTask={newTask}
+                handleChange={handleChange}
+              />
+            )}
+          />
+          <Route path="/auth/login" exact component={LoginPage} />
+          <Route path="/auth/registration" exact component={RegistrationPage} />
+        </Switch>
       </Device>
     </ThemeProvider>
   );
