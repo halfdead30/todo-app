@@ -1,35 +1,26 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { openTab } from "../../store/reducers/tabReducer";
 import TasksTabHeader from "../TasksTabHeader/TasksTabHeader";
 import TasksList from "../TasksList/TasksList";
-import TasksTabWrapper from "./TasksTabWrapper.style";
-import { useSelector } from "react-redux";
+import TasksTabWrapper from "./TasksTab.style";
 
-const TasksTab = ({
-  activeTab,
-  tabName,
-  tabTitle,
-  tabDesc,
-  openTab,
-  changeStatus,
-  deleteTask,
-  taskHeight,
-}) => {
-  const tasks = useSelector((state) => state.tasks);
+const TasksTab = ({ tasks, tabName, tabTitle, tabDesc, taskHeight }) => {
+  const activeTab = useSelector((state) => state.activeTab.tabName);
+  const dispatch = useDispatch();
+
+  const openTasksTab = (type) => {
+    dispatch(openTab({ type }));
+  };
 
   return (
-    <TasksTabWrapper
-      className={activeTab === tabName ? "active" : ""}
-      tasksTabBgColor="#fff"
-      shadowColor="rgba(0, 0, 0, 0.125)"
-      onClick={() => openTab(tabName)}
-    >
+    <TasksTabWrapper onClick={() => openTasksTab(tabName)}>
       <TasksTabHeader tasks={tasks} tabTitle={tabTitle} tabDesc={tabDesc} />
 
       <TasksList
+        tasks={tasks}
         tabName={tabName}
         activeTab={activeTab}
-        changeStatus={changeStatus}
-        deleteTask={deleteTask}
         taskHeight={taskHeight}
       />
     </TasksTabWrapper>

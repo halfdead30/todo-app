@@ -4,7 +4,7 @@ import { setIsFormOpen } from "../../store/reducers/formStatusReducer";
 import FooterWrapper from "./Footer.style";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
 
-const Footer = ({ addTask, newTask, handleChange }) => {
+const Footer = () => {
   const isFormOpen = useSelector((state) => state.isFormOpen.status);
   const dispatch = useDispatch();
 
@@ -16,12 +16,7 @@ const Footer = ({ addTask, newTask, handleChange }) => {
         <span className="hr"></span>
         <span className="hr vr"></span>
       </div>
-      <AddTaskForm
-        isFormOpen={isFormOpen}
-        addTask={addTask}
-        newTask={newTask}
-        handleChange={handleChange}
-      />
+      <AddTaskForm isFormOpen={isFormOpen} />
     </FooterWrapper>
   );
 };

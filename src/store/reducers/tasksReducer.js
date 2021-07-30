@@ -21,14 +21,19 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask(state, action) {
-      return [...state, { action }];
+      return [...state, action.payload];
     },
-    doneTask(state, action) {
-      return;
+    doneTask(state, { payload: { id } }) {
+      return state.map((el) => (el.id === id ? { ...el, done: !el.done } : el));
+    },
+    deleteTask(state, { payload: { id } }) {
+      return state.map((el) =>
+        el.id === id ? { ...el, deleted: !el.deleted } : el
+      );
     },
   },
 });
 
-export const { addTask } = tasksSlice.actions;
+export const { addTask, doneTask, deleteTask } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

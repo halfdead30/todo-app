@@ -1,5 +1,5 @@
 import React from "react";
-import TasksTabWrapper from "./TasksTabWrapper.style";
+import TasksTabWrapper from "./TasksTabHeader.style";
 
 const TasksTabHeader = ({ tasks, tabTitle, tabDesc }) => (
   <TasksTabWrapper>

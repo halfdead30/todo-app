@@ -1,8 +1,8 @@
 import React from "react";
 import FormBtnWrapper from "./FormBtn.style";
 
-const LoginBtn = ({ handleSubmit, children }) => {
+const FormBtn = ({ handleSubmit, children }) => {
   return <FormBtnWrapper onClick={handleSubmit}>{children}</FormBtnWrapper>;
 };
 
-export default LoginBtn;
+export default FormBtn;

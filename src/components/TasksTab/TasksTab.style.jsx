@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import { themeLayout } from "../../theme/themeLayout";
 
-/**
- * tasksTabBgColor: #fff
- */
-
 const TasksTabWrapper = styled.div`
   margin: 8px 0px;
   min-height: 90px;

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const hide = (h) => keyframes`
     0% {
@@ -21,15 +21,16 @@ const show = (h) => keyframes`
 `;
 
 const TasksListWrapper = styled.div`
-    margin: 10px 0px;
-    overflow: hidden;
-    animation: ${props => hide(props.taskHeight)} 1s;
-    animation-fill-mode: forwards;
+  margin: 10px 0px;
+  overflow: hidden;
+  height: 0;
+  /* animation: ${(props) => hide(props.taskHeight)} 1s;
+  animation-fill-mode: forwards; */
 
-    &.active {
-        animation: ${props => show(props.taskHeight)} 1s;
-        animation-fill-mode: forwards;
-    }
+  &.active {
+    animation: ${(props) => show(props.taskHeight)} 1s;
+    animation-fill-mode: forwards;
+  }
 `;
 
 export default TasksListWrapper;

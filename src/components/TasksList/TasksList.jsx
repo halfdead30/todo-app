@@ -1,17 +1,8 @@
 import React from "react";
 import TasksListItem from "../TasksListItem/TasksListItem";
 import TasksListWrapper from "../TasksList/TasksList.style";
-import { useSelector } from "react-redux";
 
-const TasksList = ({
-  tabName,
-  activeTab,
-  changeStatus,
-  deleteTask,
-  taskHeight,
-}) => {
-  const tasks = useSelector((state) => state.tasks);
-
+const TasksList = ({ tasks, tabName, activeTab, taskHeight }) => {
   return (
     <TasksListWrapper
       className={activeTab === tabName ? "active" : ""}
@@ -21,11 +12,10 @@ const TasksList = ({
         {tasks.map(({ id, title, done, deleted }) => (
           <TasksListItem
             key={id}
+            id={id}
             title={title}
             done={done}
             deleted={deleted}
-            changeStatus={() => changeStatus(id)}
-            deleteTask={() => deleteTask(id)}
           />
         ))}
       </ul>
